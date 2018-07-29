@@ -45,7 +45,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'timestamp' => [
-                'class' => 'yii\behaviours\TimestampBehavior',
+                'class' => TimestampBehavior::className(),
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
@@ -64,7 +64,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['status_id', 'default', 'value' => self::STATUS_ACTIVE],
             ['role_id', 'default', 'value' => 10],
             ['user_type_id', 'default', 'value' => 10],
-            ['username', 'filter', 'value' => 'trim'],
+            ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
             ['username', 'unique'],
             ['username', 'string', 'min' => 2, 'max' => 255],
