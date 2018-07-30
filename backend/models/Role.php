@@ -29,6 +29,7 @@ class Role extends \yii\db\ActiveRecord
         return [
             [['role_value'], 'integer'],
             [['role_name'], 'string', 'max' => 50],
+            [['role_name', 'role_value'], 'required'],
         ];
     }
 
