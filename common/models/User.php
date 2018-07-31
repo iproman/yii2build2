@@ -220,4 +220,14 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(Role::className(), ['role_value' => 'role_id']);
     }
+
+    /**
+     * get role name
+     *
+     * @return string
+     */
+    public function getRoleName()
+    {
+        return $this->role ? $this->role->role_name : '- no role -';
+    }
 }
