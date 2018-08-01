@@ -27,6 +27,7 @@ class Status extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['status_name,', 'status_value'], 'required'],
             [['status_value'], 'integer'],
             [['status_name'], 'string', 'max' => 50],
         ];
