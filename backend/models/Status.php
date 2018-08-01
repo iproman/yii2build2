@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use common\models\User;
 
 /**
  * This is the model class for table "status".
@@ -43,5 +44,15 @@ class Status extends \yii\db\ActiveRecord
             'status_name' => 'Status Name',
             'status_value' => 'Status Value',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(
+            User::className(), ['status_id' => 'status_value']
+        );
     }
 }
