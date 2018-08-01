@@ -10,6 +10,7 @@ use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 use backend\models\Role;
+use backend\models\Status;
 
 /**
  * User model
@@ -74,7 +75,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'unique'],
-            [['role_id'],'in', 'range'=>array_keys($this->getRoleList())],
+            [['role_id'], 'in', 'range' => array_keys($this->getRoleList())],
         ];
     }
 
@@ -242,5 +243,15 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $droptions = Role::find()->asArray()->all();
         return ArrayHelper::map($droptions, 'role_value', 'role_name');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatus()
+    {
+        return $this->hasOne(
+            Status::className(), ['status_value' => 'status_id']
+        );
     }
 }
