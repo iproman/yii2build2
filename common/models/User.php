@@ -262,6 +262,19 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getStatusName()
     {
-        return $this->status ? $this->status->status_name : '- no status name -';
+        return $this->status
+            ? $this->status->status_name
+            : '- no status name -';
+    }
+
+    /**
+     * get list of statuses for dropdown
+     *
+     * @return array
+     */
+    public static function getStatusList()
+    {
+        $droptions = Status::find()->asArray()->all();
+        return ArrayHelper::map($droptions, 'status_value', 'status_name');
     }
 }
