@@ -76,6 +76,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'email'],
             ['email', 'unique'],
             [['role_id'], 'in', 'range' => array_keys($this->getRoleList())],
+            [['status_id'], 'in', 'range' => array_keys($this::getStatusList())],
         ];
     }
 
