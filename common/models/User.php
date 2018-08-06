@@ -63,13 +63,14 @@ class User extends ActiveRecord implements IdentityInterface
      * validation rules
      */
     public function rules()
-    {
+    { //TODO static methods
         return [
             ['status_id', 'default', 'value' => self::STATUS_ACTIVE],
             [['status_id'], 'in', 'range' => array_keys($this::getStatusList())],
             ['role_id', 'default', 'value' => 10],
-            [['role_id'], 'in', 'range' => array_keys($this->getRoleList())],
+            [['role_id'], 'in', 'range' => array_keys($this::getRoleList())],
             ['user_type_id', 'default', 'value' => 10],
+            [['user_type_id'], 'in', 'range' => array_keys($this::getUserTypeList())],
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
             ['username', 'unique'],
