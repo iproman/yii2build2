@@ -311,4 +311,14 @@ class User extends ActiveRecord implements IdentityInterface
         $droptions = UserType::find()->asArray()->all();
         return ArrayHelper::map($droptions, 'user_type_value', 'user_type_name');
     }
+
+    /**
+     * get user type id
+     *
+     * @return string
+     */
+    public function getUserTypeId()
+    {
+        return $this->userType ? $this->userType->id : 'none';
+    }
 }
