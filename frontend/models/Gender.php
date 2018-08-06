@@ -28,6 +28,7 @@ class Gender extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['gender_name'], 'required'],
             [['gender_name'], 'string', 'max' => 50],
         ];
     }
