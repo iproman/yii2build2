@@ -298,8 +298,17 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getUserTypeName()
     {
-        return $this->userType ?
-            $this->userType->user_type_name :
-            ' - no user type - ';
+        return $this->userType ? $this->userType->user_type_name : ' - no user type - ';
+    }
+
+    /**
+     * get list of user types for dropdown
+     *
+     * @return array
+     */
+    public static function getUserTypeList()
+    {
+        $droptions = UserType::find()->asArray()->all();
+        return ArrayHelper::map($droptions, 'user_type_value', 'user_type_name');
     }
 }
