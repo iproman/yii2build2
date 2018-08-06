@@ -290,4 +290,16 @@ class User extends ActiveRecord implements IdentityInterface
             ['user_type_value' => 'user_type_id']
         );
     }
+
+    /**
+     * get user type name
+     *
+     * @return string
+     */
+    public function getUserTypeName()
+    {
+        return $this->userType ?
+            $this->userType->user_type_name :
+            ' - no user type - ';
+    }
 }
