@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 use backend\models\Role;
 use backend\models\Status;
+use backend\models\UserType;
 
 /**
  * User model
@@ -277,5 +278,16 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $droptions = Status::find()->asArray()->all();
         return ArrayHelper::map($droptions, 'status_value', 'status_name');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserType()
+    {
+        return $this->hasOne(
+            UserType::class,
+            ['user_type_value' => 'user_type_id']
+        );
     }
 }
