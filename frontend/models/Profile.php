@@ -110,4 +110,15 @@ class Profile extends ActiveRecord
     {
         return $this->gender->gender_name;
     }
+
+    /**
+     * Get list of genders for dropdown
+     *
+     * @return array
+     */
+    public static function getGenderList()
+    {
+        $droptions = Gender::find()->asArray()->all();
+        return ArrayHelper::map($droptions, 'id', 'gender_name');
+    }
 }
