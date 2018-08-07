@@ -44,7 +44,18 @@ class Profile extends ActiveRecord
             [['user_id', 'gender_id'], 'integer'],
             [['first_name', 'last_name'], 'string'],
             [['birthdate', 'created_at', 'updated_at'], 'safe'],
-            [['gender_id'], 'exist', 'skipOnError' => true, 'targetClass' => Gender::className(), 'targetAttribute' => ['gender_id' => 'id']],
+            [
+                ['gender_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Gender::className(),
+                'targetAttribute' => ['gender_id' => 'id']
+            ],
+            [
+                ['gender_id'],
+                'in',
+                'range' => array_keys($this->getGenderList())
+            ],
         ];
     }
 
