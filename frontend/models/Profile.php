@@ -98,7 +98,7 @@ class Profile extends ActiveRecord
      */
     public function getGender()
     {
-        return $this->hasOne(Gender::className(), ['id' => 'gender_id']);
+        return $this->hasOne(Gender::class, ['id' => 'gender_id']);
     }
 
     /**
@@ -120,5 +120,13 @@ class Profile extends ActiveRecord
     {
         $droptions = Gender::find()->asArray()->all();
         return ArrayHelper::map($droptions, 'id', 'gender_name');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }
