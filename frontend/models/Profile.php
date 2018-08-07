@@ -73,6 +73,9 @@ class Profile extends ActiveRecord
             'gender_id' => 'Gender ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'genderName' => Yii::t('app', 'Gender'),
+            'userLink' => Yii::t('app', 'User'),
+            'profileIdLink' => Yii::t('app', 'Profile'),
         ];
     }
 
