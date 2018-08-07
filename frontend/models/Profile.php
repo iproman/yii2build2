@@ -100,4 +100,14 @@ class Profile extends ActiveRecord
     {
         return $this->hasOne(Gender::className(), ['id' => 'gender_id']);
     }
+
+    /**
+     * Uses magic getGender on return statement
+     *
+     * @return string
+     */
+    public function getGenderName()
+    {
+        return $this->gender->gender_name;
+    }
 }
