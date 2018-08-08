@@ -147,4 +147,14 @@ class Profile extends ActiveRecord
     {
         return $this->user ? $this->user->id : 'none';
     }
+
+    /**
+     * @return string
+     */
+    public function getUserLink()
+    {
+        $url = Url::to(['user/view', 'id' => $this->UserId]);
+        $options = [];
+        return Html::a($this->getUserName(), $url, $options);
+    }
 }
