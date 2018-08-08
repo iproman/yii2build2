@@ -139,4 +139,12 @@ class Profile extends ActiveRecord
     {
         return $this->user->username;
     }
+
+    /**
+     * @return string
+     */
+    public function getUserId()
+    {
+        return $this->user ? $this->user->id : 'none';
+    }
 }
