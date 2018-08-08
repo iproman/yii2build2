@@ -9,6 +9,8 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\IdentityInterface;
 use backend\models\Role;
 use backend\models\Status;
@@ -337,6 +339,16 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getProfileId()
     {
-        return $this->profile ? $this->profile->id : 'none' ;
+        return $this->profile ? $this->profile->id : 'none';
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfileLink()
+    {
+        $url = Url::to(['profile/view', 'id' => $this->profileId]);
+        $options = [];
+        return Html::a($this->profile ? 'profile' : 'none', $url, $options);
     }
 }
