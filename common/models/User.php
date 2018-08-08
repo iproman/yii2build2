@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use frontend\models\Profile;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -321,5 +322,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function getUserTypeId()
     {
         return $this->userType ? $this->userType->id : 'none';
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfile()
+    {
+        return $this->hasOne(Profile::class, ['user_id' => 'id']);
     }
 }
