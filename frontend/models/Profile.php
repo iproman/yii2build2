@@ -157,4 +157,14 @@ class Profile extends ActiveRecord
         $options = [];
         return Html::a($this->getUserName(), $url, $options);
     }
+
+    /**
+     * @return string
+     */
+    public function getProfileIdLink()
+    {
+        $url = Url::to(['profile/update', 'id' => $this->id]);
+        $options = [];
+        return Html::a($this->id, $url, $options);
+    }
 }
