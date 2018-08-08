@@ -129,4 +129,14 @@ class Profile extends ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
+
+    /**
+     * @get Username
+     *
+     * @return mixed
+     */
+    public function getUserName()
+    {
+        return $this->user->username;
+    }
 }
