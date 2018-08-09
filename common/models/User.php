@@ -351,4 +351,16 @@ class User extends ActiveRecord implements IdentityInterface
         $options = [];
         return Html::a($this->profile ? 'profile' : 'none', $url, $options);
     }
+
+    /**
+     * @return string
+     */
+    public function getUserIdLink()
+    {
+        $url = Url::to(['user/update', 'id' => $this->id]);
+        $options = [];
+        return Html::a($this->id, $url, $options);
+    }
+
+
 }
