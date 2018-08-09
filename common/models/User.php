@@ -362,5 +362,13 @@ class User extends ActiveRecord implements IdentityInterface
         return Html::a($this->id, $url, $options);
     }
 
-
+    /**
+     * @return string
+     */
+    public function getUserLink()
+    {
+        $url = Url::to(['user/view', 'id' => $this->Id]);
+        $options = [];
+        return Html::a($this->username, $url, $options);
+    }
 }
