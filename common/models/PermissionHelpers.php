@@ -79,4 +79,20 @@ class PermissionHelpers
             return false;
         }
     }
+
+    /**
+     * @param $status_name
+     * @return bool
+     * @throws yii\db\Exception
+     */
+    public static function requireMinimumStatus($status_name)
+    {
+        if (Yii::$app->user->identity->status_id >=
+            ValueHelpers::getStatusValue($status_name)
+        ) {
+            return true;
+        } else {
+            return false;
+        };
+    }
 }
