@@ -63,4 +63,20 @@ class PermissionHelpers
             return Yii::$app->getResponse()->redirect(Url::to(['upgrade/index']));
         }
     }
+
+    /**
+     * @param $status_name
+     * @return bool
+     * @throws yii\db\Exception
+     */
+    public static function requireStatus($status_name)
+    {
+        if (Yii::$app->user->identity->status_id ==
+            ValueHelpers::getStatusValue($status_name)
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
