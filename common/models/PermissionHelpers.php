@@ -111,4 +111,20 @@ class PermissionHelpers
             return false;
         }
     }
+
+    /**
+     * @param $role_name
+     * @return bool
+     * @throws yii\db\Exception
+     */
+    public static function requireMinimumRole($role_name)
+    {
+        if (Yii::$app->user->identity->role_id >=
+            ValueHelpers::getRoleValue($role_name)
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
