@@ -64,9 +64,9 @@ class SiteController extends Controller
     }
 
     /**
-     * Login action.
-     *
-     * @return string
+     * @return string|\yii\web\Response
+     * @throws \yii\db\Exception
+     * @throws \yii\web\NotFoundHttpException
      */
     public function actionLogin()
     {
@@ -75,7 +75,7 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(Yii::$app->request->post()) && $model->loginAdmin()) {
             return $this->goBack();
         } else {
             $model->password = '';
