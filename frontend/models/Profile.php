@@ -9,6 +9,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "profile".
@@ -38,7 +39,7 @@ class Profile extends ActiveRecord
     {
         return [
             'timestamp' => [
-                'class' => 'yii\behaviours\TimestampBehavior',
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
