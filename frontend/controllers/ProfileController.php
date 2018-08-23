@@ -5,9 +5,12 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Profile;
 use frontend\models\ProfileSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\PermissionHelpers;
+use common\models\RecordHelpers;
 
 /**
  * ProfileController implements the CRUD actions for Profile model.
@@ -20,8 +23,19 @@ class ProfileController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['index', 'view', 'create', 'update', 'delete'],
+                'rules' => [
+                   [
+                       'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                       'allow' => true,
+                       'roles' => ['@'],
+                   ] ,
+                ],
+            ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
