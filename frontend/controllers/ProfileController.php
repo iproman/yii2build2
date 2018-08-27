@@ -27,11 +27,11 @@ class ProfileController extends Controller
                 'class' => AccessControl::class,
                 'only' => ['index', 'view', 'create', 'update', 'delete'],
                 'rules' => [
-                   [
-                       'actions' => ['index', 'view', 'create', 'update', 'delete'],
-                       'allow' => true,
-                       'roles' => ['@'],
-                   ] ,
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
             'verbs' => [
@@ -44,18 +44,19 @@ class ProfileController extends Controller
     }
 
     /**
-     * Lists all Profile models.
-     * @return mixed
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \yii\db\Exception
      */
     public function actionIndex()
     {
-        $searchModel = new ProfileSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if ($already_exists = RecordHelpers::userHas('profile')) {
+            return $this->render('view', [
+                'model' => $this->findModel($already_exists),
+            ]);
+        } else {
+            return $this->redirect(['create']);
+        }
     }
 
     /**
