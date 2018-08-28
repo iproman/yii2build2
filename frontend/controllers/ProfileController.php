@@ -69,7 +69,7 @@ class ProfileController extends Controller
     public function actionView($id)
     {
 
-        if($already_exists = RecordHelpers::userHas(['profile'])){
+        if ($already_exists = RecordHelpers::userHas(['profile'])) {
             return $this->render('view', [
                 'model' => $this->findModel($already_exists),
             ]);
@@ -80,20 +80,29 @@ class ProfileController extends Controller
 
     /**
      * Creates a new Profile model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * If get model id response, show view of that id.
+     * Else if data from post received, validate, save, and redirect to view.
+     * Else redirect to form
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \yii\db\Exception
      */
     public function actionCreate()
     {
         $model = new Profile();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model->user_id = \Yii::$app->user->identity->id;
+        if ($already_exists = RecordHelpers::userHas('profile')) {
+            return $this->render('view', [
+                'model' => $this->findModel($already_exists),
+            ]);
+        } elseif ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view']);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
