@@ -108,21 +108,25 @@ class ProfileController extends Controller
     /**
      * Updates an existing Profile model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
      */
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
-        $model = $this->findModel($id);
+        if ($model = Profile::find()->where(['user_id' =>
+            Yii::$app->user->identity->id])->one()) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view']);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
+        } else {
+            throw new NotFoundHttpException('No Such Profile.');
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
