@@ -7,7 +7,7 @@ use common\models\PermissionHelpers;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Profile */
 
-$this->title = $model->id;
+$this->title = $model->user->username . "'s Profile";
 $this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
