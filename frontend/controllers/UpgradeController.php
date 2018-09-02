@@ -2,7 +2,9 @@
 
 namespace frontend\controllers;
 
-class UpgradeController extends \yii\web\Controller
+use yii\web\Controller;
+
+class UpgradeController extends Controller
 {
     public function actionIndex()
     {

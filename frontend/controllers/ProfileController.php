@@ -110,9 +110,12 @@ class ProfileController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
+     * @throws \yii\db\Exception
      */
     public function actionUpdate()
     {
+        PermissionHelpers::requireUpgradeTo('Paid');
+
         if ($model = Profile::find()->where(['user_id' =>
             Yii::$app->user->identity->id])->one()) {
 
