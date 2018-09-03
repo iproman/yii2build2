@@ -41,9 +41,15 @@ class UpgradeController extends Controller
         ];
     }
 
+    /**
+     * @return string
+     */
     public function actionIndex()
     {
-        return $this->render('index');
+        $name = Yii::$app->user->identity->username;
+        $profile = Profile::find()
+            ->where(['user_id' => Yii::$app->user->identity->id])->one();
+        return $this->render('index', compact(['name', 'profile']));
     }
 
 }
