@@ -51,6 +51,35 @@ $this->title = Yii::$app->params['brandLabel'];
                     Yii Documentation &raquo;
                 </a>
             </p>
+            <p>FacebookPlugin LIKE</p>
+        </div>
+        <div class="col-lg-4">
+            <h2>Advantage</h2>
+            <p>
+                Ease of use is a huge advantage. We've simplifiled RBAC and given you Free/Paid
+                user type out of the box. The Social plugins are so quick and easy to install,
+                you will love it!
+            </p>
+            <p>
+                <a href="http://www.yiiframework.com/forum/" class="btn btn-default">
+                    Yii Forum &raquo;
+                </a>
+            </p>
+            <p>
+                FacebookPlugin COMMENT
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <h2>Code Quick, Code Right!</h2>
+            <p>
+                Leverage the power of the awesome Yii 2 framework with this enhanced template.
+                Based Yii 2's advanced template, you get a full frontend and backend
+                implementation that features rich UI for backend management.
+            </p>
+            <p>
+                <a href="http://www.yiiframework.com/extensions/" class="btn btn-default">
+                    Yii Extensions &raquo;</a>
+            </p>
         </div>
     </div>
 </div>
