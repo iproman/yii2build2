@@ -7,6 +7,9 @@ use yii\bootstrap\Modal;
 use yii\bootstrap\Collapse;
 use yii\bootstrap\Alert;
 use kartik\social\FacebookPlugin;
+use rmrevin\yii\fontawesome\FontAwesome;
+
+\rmrevin\yii\fontawesome\AssetBundle::register($this);
 
 $this->title = Yii::$app->params['brandLabel'];
 ?>
@@ -18,7 +21,7 @@ $this->title = Yii::$app->params['brandLabel'];
                 ['site/signup'],
                 ['class' => 'btn btn-lg btn-success']);
         }; ?>
-        <h1><?= Yii::$app->params['brandLabel'] ?></h1>
+        <h1><?= Yii::$app->params['brandLabel'] ?> <i class="fa fa-plug"></i></h1>
 
         <p class="lead">Use this Yii 2 Template to start Project</p>
 

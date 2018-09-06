@@ -46,7 +46,7 @@ $theme = AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->params['brandLabel'],
+        'brandLabel' => Yii::$app->params['brandLabel'] . ' <i class="fa fa-plug"></i>',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
