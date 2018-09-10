@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use backend\assets\AppAsset;
@@ -9,6 +10,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use common\models\ValueHelpers;
+use rmrevin\yii\fontawesome\FontAwesome;
 
 $theme = AppAsset::register($this);
 ?>
@@ -28,7 +31,8 @@ $theme = AppAsset::register($this);
     <link rel="apple-touch-icon" sizes="144x144" href="<?= $theme->baseUrl ?>/img/favicon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="<?= $theme->baseUrl ?>/img/favicon/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="<?= $theme->baseUrl ?>/img/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="<?= $theme->baseUrl ?>/img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="<?= $theme->baseUrl ?>/img/favicon/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?= $theme->baseUrl ?>/img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="<?= $theme->baseUrl ?>/img/favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<?= $theme->baseUrl ?>/img/favicon/favicon-16x16.png">
@@ -45,27 +49,41 @@ $theme = AppAsset::register($this);
 
 <div class="wrap">
     <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
+    $is_admin = ValueHelpers::getRoleValue('Admin');
+    if (!Yii::$app->user->isGuest) {
+        NavBar::begin([
+            'brandLabel' => Yii::$app->name . '<i class="fa fa plug"></i> Admin',
+            'brandUrl' => Yii::$app->homeUrl,
+            'options' => [
+                'class' => 'navbar-inverse navbar-fixed-top',
+            ],
+        ]);
+    } else {
+        NavBar::begin([
+            'brandLabel' => Yii::$app->name . '<i class="fa fa plug"></i>',
+            'brandUrl' => Yii::$app->homeUrl,
+            'options' => [
+                'class' => 'navbar-inverse navbar-fixed-top',
+            ],
+        ]);
+    }
+
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
     ];
+    if (!Yii::$app->user->isGuest && Yii::$app->user->identity->role_id >= $is_admin) {
+        $menuItems[] = ['label' => 'Users', 'url' => ['user/index']];
+        $menuItems[] = ['label' => 'Profiles', 'url' => ['profile/index']];
+        $menuItems[] = ['label' => 'Roles', 'url' => ['role/index']];
+        $menuItems[] = ['label' => 'User Types', 'url' => ['user-type/index']];
+        $menuItems[] = ['label' => 'Statuses', 'url' => ['status/index']];
+    }
+
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Login', 'url' => ['site/login']];
     } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
+        $menuItems[] = ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+            'url' => ['site/logout']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
