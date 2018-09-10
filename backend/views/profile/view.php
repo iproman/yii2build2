@@ -8,7 +8,7 @@ use common\models\PermissionHelpers;
 /* @var $model frontend\models\Profile */
 
 $this->title = $model->id;
-$show_this_nav = PermissionHelpers::requireMinimumRole('SuperUser');
+$show_this_nav = PermissionHelpers::requireMinimumRole('Admin');
 $this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
