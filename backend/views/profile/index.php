@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\bootstrap\Collapse;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ProfileSearch */
@@ -13,11 +14,16 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="profile-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Profile', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?= Collapse::widget([
+        'items' => [
+            [
+                'label' => 'Search',
+                'content' => $this->render('_search', ['model' => $searchModel]),
+                // open its content by default
+                // 'contentOptions' => ['class' => 'in']
+            ],
+        ]
+    ]) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,15 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'user_id',
-            'first_name:ntext',
-            'last_name:ntext',
+//            'id',
+            ['attribute' => 'profileIdLink', 'format' => 'raw'],
+            ['attribute' => 'userLink', 'format' => 'raw'],
+            'first_name',
+            'last_name',
             'birthdate',
-            //'gender_id',
-            //'created_at',
-            //'updated_at',
-
+            'genderName',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
