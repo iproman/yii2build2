@@ -16,21 +16,21 @@ use common\models\User;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'id', ['options' => ['class' => 'col-md-4']]) ?>
 
-    <?= $form->field($model, 'username') ?>
+    <?= $form->field($model, 'username', ['options' => ['class' => 'col-md-4']]) ?>
 
-    <?= $form->field($model, 'email') ?>
+    <?= $form->field($model, 'email', ['options' => ['class' => 'col-md-4']]) ?>
 
-    <?= $form->field($model, 'role_id')
+    <?= $form->field($model, 'role_id', ['options' => ['class' => 'col-md-4']])
         ->dropDownList(User::getRoleList(),
             ['prompt' => 'Please Choose One']) ?>
 
-    <?= $form->field($model, 'user_type_id')
+    <?= $form->field($model, 'user_type_id', ['options' => ['class' => 'col-md-4']])
         ->dropDownList(User::getUserTypeList(),
             ['prompt' => 'Please Choose One']) ?>
 
-    <?= $form->field($model, 'status_id')
+    <?= $form->field($model, 'status_id', ['options' => ['class' => 'col-md-4']])
         ->dropDownList($model->statusList,
             ['prompt' => 'Please Choose One']) ?>
 
