@@ -49,9 +49,7 @@ class UserSearch extends user
             'query' => $query,
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) {
+        if (!($this->load($params) && !$this->validate())) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
@@ -60,9 +58,8 @@ class UserSearch extends user
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'status_id' => $this->status_id,
             'role_id' => $this->role_id,
-            'user_type_id' => $this->user_type_id,
+            'status_id' => $this->status_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
