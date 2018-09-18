@@ -16,18 +16,20 @@ use frontend\models\Profile;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'first_name') ?>
+    <?= $form->field($model, 'first_name', ['options' => ['class' => 'col-md-4']]) ?>
 
-    <?= $form->field($model, 'last_name') ?>
+    <?= $form->field($model, 'last_name', ['options' => ['class' => 'col-md-4']]) ?>
 
-    <?= $form->field($model, 'birthdate') ?>
+    <?= $form->field($model, 'birthdate', ['options' => ['class' => 'col-md-4']]) ?>
 
-    <?php echo $form->field($model, 'gender_id')
+    <?php echo $form->field($model, 'gender_id', ['options' => ['class' => 'col-md-4']])
         ->dropDownList(Profile::getGenderList(), ['prompt' => 'Please Choose One']) ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+    <div class="clear" style="clear: both"></div>
+    <div class="col-md-4">
+        <div class="form-group clear">
+            <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+            <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>
