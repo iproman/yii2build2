@@ -143,7 +143,7 @@ class UserSearch extends User
      */
     protected function addSearchParameter($query, $attribute, $partialMatch = false)
     {
-        if (($pos = strpos($attribute, '.', )) !== false) {
+        if (($pos = strpos($attribute, '.')) !== false) {
             $modelAttribute = substr($attribute, $pos + 1);
         } else {
             $modelAttribute = $attribute;
