@@ -12,6 +12,13 @@ use common\models\user;
  */
 class UserSearch extends user
 {
+
+    public $roleName;
+    public $userTypeName;
+    public $user_type_id;
+    public $statusName;
+    public $profileId;
+
     /**
      * {@inheritdoc}
      */
@@ -19,7 +26,7 @@ class UserSearch extends user
     {
         return [
             [['id', 'status_id', 'role_id', 'user_type_id'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'created_at', 'updated_at'], 'safe'],
+            [['username', 'email', 'created_at', 'updated_at', 'roleName', 'statusName', 'userTypeName', 'profileId', 'user_type_name'], 'safe'],
         ];
     }
 
