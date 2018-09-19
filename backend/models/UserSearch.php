@@ -56,6 +56,52 @@ class UserSearch extends user
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+            'attributes' => [
+                'id',
+                'userIdLink' => [
+                    'asc' => ['user.id' => SORT_ASC],
+                    'desc' => ['user.id' => SORT_DESC],
+                    'label' => 'User',
+                ],
+                'userLink' => [
+                    'asc' => ['user.username' => SORT_ASC],
+                    'desc' => ['user.username' => SORT_DESC],
+                    'label' => 'User',
+                ],
+                'profileLink' => [
+                    'asc' => ['profile.id' => SORT_ASC],
+                    'desc' => ['profile.id' => SORT_DESC],
+                    'label' => 'Role',
+                ],
+                'roleName' => [
+                    'asc' => ['role.role_name' => SORT_ASC],
+                    'desc' => ['role.role_name' => SORT_DESC],
+                    'label' => 'Role',
+                ],
+                'statusName' => [
+                    'asc' => ['status.status_name' => SORT_ASC],
+                    'desc' => ['status.status_name' => SORT_DESC],
+                    'label' => 'Status',
+                ],
+                'userTypeName' => [
+                    'asc' => ['user_type.user_type_name' => SORT_ASC],
+                    'desc' => ['user_type.user_type_name' => SORT_DESC],
+                    'label' => 'User Type',
+                ],
+                'created_at' => [
+                    'asc' => ['created_at' => SORT_ASC],
+                    'desc' => ['created_at' => SORT_DESC],
+                    'label' => 'Created At',
+                ],
+                'email' => [
+                    'asc' => ['email' => SORT_ASC],
+                    'desc' => ['email' => SORT_DESC],
+                    'label' => 'Email',
+                ],
+            ]
+        ]);
+
         if (!($this->load($params) && !$this->validate())) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
