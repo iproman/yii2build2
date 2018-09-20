@@ -50,8 +50,6 @@ class UserSearch extends User
     {
         $query = user::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -102,7 +100,7 @@ class UserSearch extends User
             ]
         ]);
 
-        if (!($this->load($params) && !$this->validate())) {
+        if (!($this->load($params) && $this->validate())) {
             $query->joinWith(['role'])
                 ->joinWith(['status'])
                 ->joinWith(['profile'])
