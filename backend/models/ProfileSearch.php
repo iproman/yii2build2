@@ -64,16 +64,16 @@ class ProfileSearch extends Profile
                     'desc' => ['Profile.id' => SORT_DESC],
                     'label' => 'ID',
                 ],
-                'serLink' => [
+                'userLink' => [
                     'asc' => ['user.username' => SORT_ASC],
                     'desc' => ['user.username' => SORT_DESC],
-                    'lable' => 'User',
+                    'label' => 'User',
                 ],
             ]
         ]);
 
         if (!($this->load($params) && $this->validate())) {
-            $query->joinWith(['gender]'])
+            $query->joinWith(['gender'])
                 ->joinWith(['user']);
 
             return $dataProvider;
@@ -82,7 +82,7 @@ class ProfileSearch extends Profile
         $this->addSearchParameter($query, 'profile.id');
         $this->addSearchParameter($query, 'first_name', true);
         $this->addSearchParameter($query, 'last_name', true);
-        $this->addSearchParameter($query, 'birthday');
+        $this->addSearchParameter($query, 'birthdate');
         $this->addSearchParameter($query, 'gender_id');
         $this->addSearchParameter($query, 'created_at');
         $this->addSearchParameter($query, 'updated_at');
@@ -108,13 +108,12 @@ class ProfileSearch extends Profile
      */
     protected function addSearchParameter($query, $attribute, $partialMatch = false)
     {
-        if (($pos = strrpos($attribute, '.')) !== false) {
+        if (($pos = strpos($attribute, '.')) !== false) {
             $modelAttribute = substr($attribute, $pos + 1);
         } else {
             $modelAttribute = $attribute;
         }
-
-        $value = $this->modelAttribute;
+        $value = $this->$modelAttribute;
         if (trim($value) === '') {
             return;
         }
