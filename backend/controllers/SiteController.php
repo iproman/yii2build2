@@ -1,6 +1,8 @@
 <?php
+
 namespace backend\controllers;
 
+use common\models\PermissionHelpers;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -26,7 +28,16 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return PermissionHelpers::requireMinimumRole('Admin')
+                                && PermissionHelpers::requireStatus('Active');
+                        }
+                    ],
+                    [
+                        'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
